@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 100%;">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body style="height: 100%;">
+<h4>Qt Meta Object With Cef</h4>
+<textarea id="Console" readonly style="width: 100%; height: 100%;"></textarea>
+<script>
+"use strict";
+document.addEventListener("DOMContentLoaded", () => {
+    const $console = document.getElementById("Console");
+    const log = (...args) => {
+        $console.innerHTML += `${args}\n`;
+    };
+
+    let emitCount = 0;
+    const signalCb = (result) => {
+        log(`subModule.timeout emits ${result}, ${emitCount}/5`);
+        if (emitCount++ === 5) {
+            bridge.subModule.timeout.disconnect(signalCb);
+            log(`Remove event listener for subModule.timeout`);
+        }
+    }
+    bridge.subModule.timeout.connect(signalCb);
+
+    bridge.returnNumber("Test")
+        .then(number => {
+            log(`returnNumber returns ${number}`);
+        });
+    bridge.subModule.setType(1)
+        .then(() => {
+            log(`setType returns`);
+        });
+    bridge.subModule.callNonExist()
+        .catch(e => {
+            log(`callNonExist exception called successfully, ${e}`);
+        });
+    bridge.returnNumber(123)
+        .catch(e => {
+            log(`returnNumber exception called successfully, ${e}`);
+        });
+});
+</script>
+</body>
+</html>

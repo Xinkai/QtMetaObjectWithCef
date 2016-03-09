@@ -1,0 +1,15 @@
+# Cef dist
+cefclient/
+cefsimple/
+/cef*
+Debug/
+include/
+libcef_dll/
+Release/
+Resources/
+LICENSE.txt
+macros.cmake
+README.txt
+
+.idea/
+.directory
