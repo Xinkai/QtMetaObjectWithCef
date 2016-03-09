@@ -3,8 +3,6 @@
 
 #include "include/cef_app.h"
 
-class GtkWindowing;
-
 class ClientApp: public CefApp,
                  public CefBrowserProcessHandler {
 public:
@@ -18,11 +16,6 @@ public:
 
   virtual void OnRegisterCustomSchemes(CefRefPtr<CefSchemeRegistrar> registrar) override;
 
-
-
-
-
-  GtkWindowing* windowing = nullptr;
 private:
 
     CefRefPtr<CefRenderProcessHandler> renderProcess = nullptr;

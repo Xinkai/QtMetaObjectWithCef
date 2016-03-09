@@ -44,7 +44,6 @@ void ClientHandler::OnAfterCreated(CefRefPtr<CefBrowser> browser) {
         return;
     }
 
-//    this->clientApp->windowing->onBrowserWindowCreated(browser);
     #include "cg/ClientSignal.cppf"
 
 }
